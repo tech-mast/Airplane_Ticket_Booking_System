@@ -1,0 +1,32 @@
+﻿@page 
+@model EagleFlight.Pages.Admin.IndexModel
+@inject SignInManager<EagleFlightUser> signInManager;
+@{
+    ViewData["Title"] = "Admin Menus";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="container">
+    <section class="admin-cardlist row">
+
+        <div class="admin-card">
+            <a asp-page="/Admin/Users/Index"><i class="fas fa-users menu-icon"></i></a>
+            <p>User</p>
+        </div>
+        <div class="admin-card">
+            <a asp-page="/Admin/Flights/Index"><i class="fas fa-calendar-alt menu-icon"></i></a>
+            <p>Flight</p>
+        </div>
+        <div class="admin-card">
+            <a asp-page="/Admin/Ticket"><i class="fas fa-ticket-alt menu-icon"></i></a>
+            <p>Ticket</p>
+        </div>
+        <div class="admin-card">
+            <a asp-page="/Admin/Planes/Index"><i class="fas fa-plane menu-icon"></i></a>
+            <p>Plane</p>
+        </div>
+    </section>
+</div>
+
+

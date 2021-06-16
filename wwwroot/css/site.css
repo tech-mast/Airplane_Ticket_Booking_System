@@ -1,0 +1,500 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+  background-color: var(--dark-color);
+  color: #fff;
+  /* Vertically center the text there */
+}
+
+
+/* Input border underline */
+.border-d-1 {
+  border: none;
+  border-bottom: 1px solid #333;
+}
+
+/* nav bar */
+#brand-logo{
+  margin: 0;
+  padding: 0 10px;
+  height: 6rem;
+  width: 6rem;
+}
+
+
+/* Copy from customized css */
+:root {
+  --primary-color:#047aed;
+  --secondary-color:#1c3fa8;
+  --dark-color:#002240;
+  --light-color:#f4f4f4;
+}
+
+/* Basic Setup */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+h1,h2{
+  font-weight: 300;
+  line-height: 1.2;
+  margin:10px 0;
+}
+
+
+label{
+  margin: 0;
+}
+
+
+/* keep the image within the container */
+img{
+  width: 100%;
+}
+
+
+
+select:focus{
+  outline: none;
+}
+
+
+
+/* For Navbar */
+.navbar{
+  background-color: var(--dark-color);
+  color:#fff;
+  height: 70px;
+}
+
+.navbar .flex{
+  justify-content: space-between;
+  }
+  .navbar a{
+      color: #fff;
+      padding: 10px;
+      margin: 0 5px;
+  }
+  
+  .navbar a:hover{
+      border-bottom: 2px #fff solid;
+  }
+
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* Showcase */
+
+
+.showcase{
+  height:400px;
+  /* background-color: var(--primary-color); */
+  background-image: url(/img/p1.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  color: #fff;
+  position: relative;
+
+  animation-name: changeBG;
+  animation-duration: 15s;
+  animation-iteration-count:infinite;
+  animation-delay: 0ms;
+
+}
+
+@keyframes changeBG {
+  13%   {background-image: url(/img/p1.jpeg);}
+  46%  {background-image: url(/img/p2.jpeg);}
+  79%  {background-image: url(/img/p3.jpeg);}
+  /* to vaoid the weird gap at the begining of every iteration, use below code to smooth it */
+  100%   {background-image: url(/img/p1.jpeg);}
+}
+
+.showcase-text{
+  width: 30%;
+  background-color: rgba(0, 0, 0,0.6);
+  border-radius: 10px;
+  padding:0 5px 0 5px;
+}
+
+.search-ticket-form .form-control{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: 100%;
+}
+
+.form-control input{
+  width: 75%;
+}
+
+.search-ticket-form{
+  position: relative;
+  z-index: 100;
+}
+
+
+
+
+.container{
+  max-width: 1200px;
+  margin:0 auto;
+  /* TODO: find out how overflow works */
+  overflow: hidden;
+}
+
+
+.card{
+  background-color: #fff;
+  /* background-color:rgba(0, 0, 0, 0.5); */
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 10px;
+  color: #333;
+}
+
+.btn{
+  display: inline-block;
+  padding: 10px 30px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-outline{
+  background-color: transparent;
+  border:1px #fff solid;
+}
+
+.btn:hover{
+  transform: scale(0.9);
+}
+
+/* Text */
+.lead{
+  font-size: 1.3rem;
+}
+
+.sm{
+  font-size: 1rem;
+}
+
+.md{
+  font-size: 2rem;
+}
+
+.lg{
+  font-size: 3rem;
+}
+.text-center{
+  text-align:center;
+}
+
+/* Margin */
+.my-1{
+  margin: 1rem 0;
+}
+
+.my-2{
+  margin: 1.5rem 0;
+}
+
+.my-3{
+  margin: 2rem 0;
+}
+
+.my-4{
+  margin: 3rem 0;
+}
+
+.my-5{
+  margin: 4rem 0;
+}
+
+.m-1{
+  margin: 1rem;
+}
+
+.m-2{
+  margin: 1.5rem;
+}
+
+.m-3{
+  margin: 2rem;
+}
+
+.m-4{
+  margin: 3rem;
+}
+
+.m-5{
+  margin: 4rem;
+}
+
+/* Padding */
+.py-1{
+  padding: 1rem 0;
+}
+
+.py-2{
+  padding: 1.5rem 0;
+}
+
+.py-3{
+  padding: 2rem 0;
+}
+
+.py-4{
+  padding: 3rem 0;
+}
+
+.py-5{
+  padding: 4rem 0;
+}
+
+.p-1{
+  padding: 1rem;
+}
+
+.p-2{
+  padding: 1.5rem;
+}
+
+.p-3{
+  padding: 2rem;
+}
+
+.p-4{
+  padding: 3rem;
+}
+
+.p-5{
+  padding: 4rem;
+}
+
+
+
+/* Backgroud and button color */
+.bg-primary, .bg-primary{
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.bg-secondary, .bg-secondary{
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.bg-dark, .btn-dark, .bg-dark a, .btn-dark a{
+  background-color: var(--dark-color);
+  color: #fff;
+}
+
+.bg-light, .btn-light{
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.border-0{
+  border: 0;
+}
+
+/* Top bar */
+.top-bar{
+  margin: 0;
+  padding: 0;
+  height: 500px;
+}
+
+
+
+.top-bar-form{
+  position: relative;
+  top:2rem;
+  height: 20rem;
+  width: 22rem;
+  padding: 2rem;
+  z-index: 100;
+}
+
+
+
+/* Layouts Grid, Flex */
+.grid-col13{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  justify-content: space-between;
+  gap:5px;
+  align-items: center;
+}
+
+.border-d-1{
+  border: none;
+  border-bottom:1px solid #333;
+}
+
+.col-span-2{
+  column-span: 2;
+}
+
+.hidden{
+  display: none;
+}
+
+
+
+/* Boarding */
+.profile-horizontal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-panel{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+}
+
+.profile-image {
+  max-height: 20rem;
+}
+
+.profile-image img{
+  height: 100%;
+  overflow: hidden;
+}
+
+
+/* Admin Index */
+.admin-cardlist{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  column-gap: 3rem;
+}
+
+.admin-card{
+  background: linear-gradient(45deg
+    ,var(--dark-color) 85%,
+    rgba(255,255,255,0.5) 90%,
+    var(--dark-color)95% );
+  color: #fff;
+  height: 10rem;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 1rem;
+}
+
+.admin-card:hover{
+  background: linear-gradient(45deg
+  ,var(--dark-color) 50%,
+  rgba(255,255,255,0.5) 100% );
+}
+
+.admin-card .menu-icon{
+  color: #fff;
+  font-size: 5rem;
+}

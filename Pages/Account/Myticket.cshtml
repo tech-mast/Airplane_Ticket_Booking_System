@@ -1,0 +1,84 @@
+﻿@page
+@model EagleFlight.Pages.MyticketModel
+@{
+}
+<section>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].BookedFlight.DepartureTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].BookedFlight.ArriveTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].BookedFlight.Origin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].BookedFlight.Destination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].BookedFlight.FlightType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].TicketClass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tickets[0].Seat)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.Tickets != null)
+        {
+            <tbody>
+                @foreach (var item in Model.Tickets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.BookedFlight.DepartureTime) *@
+                            @item.BookedFlight.DepartureTime.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.BookedFlight.ArriveTime) *@
+                            @item.BookedFlight.ArriveTime.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.Origin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.Destination)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.FlightType)
+                        </td>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.Price) *@
+                            $ @item.Price.ToString("0.00")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TicketClass)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Seat)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+        {
+
+        }
+    </table>
+</section>

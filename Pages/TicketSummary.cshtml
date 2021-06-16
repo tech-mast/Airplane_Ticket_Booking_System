@@ -1,0 +1,159 @@
+﻿@page 
+@model EagleFlight.Pages.TicketSummaryModel
+@{
+}
+
+
+<h2 class="text-center text-primary" style="font-weight: bold;">Trip Summary</h2>
+
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="card border-primary">
+                <div class="row  mb-2 justify-content-md-center"><h4>Trip One</h4></div>
+                <div class="row">
+                    <div class="col-md-3">                  
+                        <div class="form-group">
+                                <label asp-for="TripOne.Origin" class="control-label"></label>
+                                <input asp-for="TripOne.Origin" class="form-control" type="hidden" value="@Model.TripOne.Origin"/>
+                                <p style="font-weight: bold">@Model.TripOne.Origin</p>
+                        </div>
+                        <div class="form-group">
+                                <label asp-for="TripOne.Destination" class="control-label"></label>
+                                <input asp-for="TripOne.Destination" class="form-control" type="hidden" value="@Model.TripOne.Destination"/>
+                                <p style="font-weight: bold">@Model.TripOne.Destination</p>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TripOne.FlightType" class="control-label"></label>
+                            <p style="font-weight: bold">@Model.TripOne.FlightType</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">      
+                        <div class="form-group">
+                                <label asp-for="TripOne.DepartureTime" class="control-label"></label>
+                                <p style="font-weight: bold">@Model.TripOne.DepartureTime.ToString("yyyy/MM/dd HH:mm")</p>
+                        </div>
+                        <div class="form-group">
+                                <label asp-for="TripOne.ArriveTime" class="control-label"></label>
+                                <p style="font-weight: bold">@Model.TripOne.ArriveTime.ToString("yyyy/MM/dd HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @{ double tripOnePrice =0;}
+                        @if(@Model.flightClass == "B")
+                            {
+                                tripOnePrice = Model.TripOne.TicketPrice * 1.5;
+                            }
+                        @if(@Model.flightClass == "E")
+                            {
+                                tripOnePrice = Model.TripOne.TicketPrice;
+                            }
+                        <div class="form-group">
+                                <label>Ticket Price: </label>
+                                <input class="form-control" value="$ @tripOnePrice" readonly/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+@{ double tripTwoPrice =0;}
+   @if(Model.TripType == "0")
+   {
+            <div class="card border-primary">
+                <div class="row mb-2 justify-content-md-center"><h4>Trip Two</h4></div>
+                <div class="row">
+                    <div class="col-md-3">                  
+                        <div class="form-group">
+                                <label asp-for="TripTwo.Origin" class="control-label"></label>
+                                <input asp-for="TripTwo.Origin" class="form-control" type="hidden" value="@Model.TripTwo.Origin"/>   
+                                <p style="font-weight: bold">@Model.TripTwo.Origin</p>
+                        </div>
+                        <div class="form-group">
+                                <label asp-for="TripTwo.Destination" class="control-label"></label>
+                                <input asp-for="TripTwo.Destination" class="form-control" type="hidden" value="@Model.TripTwo.Destination"/>                               
+                                <p style="font-weight: bold">@Model.TripTwo.Destination</p>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TripTwo.FlightType" class="control-label"></label>
+                            <p style="font-weight: bold">@Model.TripTwo.FlightType</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">      
+                        <div class="form-group">
+                                <label asp-for="TripTwo.DepartureTime" class="control-label"></label>
+                                <p style="font-weight: bold">@Model.TripTwo.DepartureTime.ToString("yyyy/MM/dd HH:mm")</p>
+                        </div>
+                        <div class="form-group">
+                                <label asp-for="TripTwo.ArriveTime" class="control-label"></label>
+                                <p style="font-weight: bold">@Model.TripTwo.ArriveTime.ToString("yyyy/MM/dd HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @* @{ double tripTwoPrice =0;} *@
+                        @if(@Model.FlightClassTwo == "B")
+                            {
+                                tripTwoPrice = Model.TripTwo.TicketPrice * 1.5;
+                            }
+                        @if(@Model.FlightClassTwo == "E")
+                            {
+                                tripTwoPrice = Model.TripTwo.TicketPrice;
+                            }
+                        <div class="form-group">
+                                <label>Ticket Price: </label>
+                                <input class="form-control" value="$ @tripTwoPrice" readonly/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+   }else{
+                        <div class="form-group">
+                                <input asp-for="TripTwo.Origin" class="form-control" type="hidden" value="test"/>   
+                        </div>
+                        <div class="form-group">
+                                <input asp-for="TripTwo.Destination" class="form-control" type="hidden" value="test"/>                               
+                        </div>
+
+
+       tripTwoPrice=0;
+   }
+            <hr>
+            <div class="container">
+                <div class="row justify-content-md-center mt-3">
+                    <div class="col-md-5">
+                        <p>Trip One:</p>
+                           @if(@Model.TripType == "0"){<p>Trip Two:</p>}
+                        <p>Air transportation charges:  </p>
+                        <p>Taxes, fees and charges: </p>
+                        <p class="text-primary fw-bold">Your Account current Balance:</p>
+                        <hr>
+                        <h3>Total: </h3>
+                    </div>
+                    <div class="col-md-5">
+                        @{ double chargeOne = (tripOnePrice+tripTwoPrice)*0.3;}
+                        @{ double chargeTwo = (tripOnePrice+tripTwoPrice)*0.2;}
+                        <p>$ @tripOnePrice</p>
+                        @if(@Model.TripType == "0"){<p>$ @tripTwoPrice</p>}
+                        <p>$ @chargeOne.ToString("0.00")</p>
+                        <p>$ @chargeTwo.ToString("0.00")</p>
+                        <p class="text-primary fw-bold">$ @Model.UserAccountBalance</p>
+                        <hr>
+                        @{ double totalPrice = chargeOne+chargeTwo+tripOnePrice+tripTwoPrice-@Model.UserAccountBalance;}
+                        @{ double TicketOnePrice = tripOnePrice*1.5-@Model.UserAccountBalance;}
+                        @{ double TicketTwoPrice = tripTwoPrice*1.5;}
+                        <h3>$ @totalPrice.ToString("0.00") </h3>
+                        <input class="form-control" asp-for="@Model.GrossTicketPrice" type="hidden" value="@totalPrice"/>
+                        <input class="form-control" asp-for="@Model.TicketOnePrice" type="hidden" value="@TicketOnePrice"/>
+                        <input class="form-control" asp-for="@Model.TicketTwoPrice" type="hidden" value="@TicketTwoPrice"/>
+                    </div>
+                    
+                    <button class="btn btn-info">Confrim and Paynow</button>
+                </div>
+                <div class="row justify-content-md-center mt-3">
+                    <a asp-page="/Index"  class="btn btn-info" style="background-color: yellow; color:black">Cancel</a>
+                </div>
+            </div>
+        </form>
+        <br>
+
+

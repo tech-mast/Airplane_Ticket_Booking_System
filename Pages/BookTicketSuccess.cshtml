@@ -1,0 +1,16 @@
+﻿@page
+@model EagleFlight.Pages.BookTicketSuccessModel
+@{
+    ViewData["Title"] = "Book Ticket and Pay successfully";
+}
+
+<h3>@ViewData["Title"]</h3>
+<p class="d-inline">Click</p>
+<a class="nav-link d-inline" asp-area="" asp-page="/Index" style= "color:blue">here</a>
+<p class="d-inline">to continue at homepage.<br> You may check your ticket information in "MY TICKET" </p>  
+<br>
+<p>Or, wait 3 seconds to continue at homepage automatically.</p>  
+
+@section Scripts {
+    <script> setTimeout(function() {window.location.href = "/Index";}, 3000);</script>
+}

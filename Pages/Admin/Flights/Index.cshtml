@@ -1,0 +1,72 @@
+@page
+@model EagleFlight.Pages.Admin.Flights.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].FlightPlane)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].ArriveTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].Origin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].FlightType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight[0].TicketPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Flight) {
+        <tr>
+            <td>
+                @item.FlightPlane.Description.Substring(0,5)
+            </td>
+            <td>
+                @item.DepartureTime.ToString("yyyy/MM/dd HH:mm")
+            </td>
+            <td>
+                @item.ArriveTime.ToString("yyyy/MM/dd HH:mm")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Origin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightType)
+            </td>
+            <td>
+                $ @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

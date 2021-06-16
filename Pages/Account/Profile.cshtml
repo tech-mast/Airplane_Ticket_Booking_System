@@ -1,0 +1,45 @@
+﻿@page
+@model EagleFlight.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Profile Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control border-d-1" readonly/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDName"></label>
+                <input asp-for="Input.IDName" class="form-control border-d-1" />
+                <span asp-validation-for="Input.IDName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDNum"></label>
+                <input asp-for="Input.IDNum" class="form-control border-d-1" />
+                <span asp-validation-for="Input.IDNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control border-d-1" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img id="img-chosen" src="@Model.imageFilePath" alt="Picture" style="width:200px">
+                <input id="img-file" type="file" asp-for="Input.ImageFile" class="form-control border-d-1" onchange="fileChosen(this)"/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/js/image.js"></script>
+}

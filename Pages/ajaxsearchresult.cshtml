@@ -1,0 +1,84 @@
+﻿@page "{DepartureDate}/{OriginLocation}/{ArriveLocation}"
+@model EagleFlight.Pages.ajaxsearchresultModel
+
+@{
+    Layout = null;
+}
+
+<div>
+    <tbody>
+        @foreach (var f in Model.FlightSearchList)
+        {
+        <tr>
+        <td>@f.Origin</td>
+        <td>@f.Destination</td>
+        <td>@f.DepartureTime.ToString("yyyy/MM/dd HH:mm")</td>
+        <td>@f.ArriveTime.ToString("yyyy/MM/dd HH:mm")</td>
+        <td>@f.FlightType</td>
+        @{ string mystringE = "a"+@f.Id.ToString();}
+        <td>  <a class="btn btn-primary" data-bs-toggle="collapse" href="#@mystringE" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom:20px">
+           $ @f.TicketPrice</a></td> 
+
+        @{ string mystringB = "b"+@f.Id.ToString();}
+        @{double business = @f.TicketPrice * 1.5;}
+        <td>  <a class="btn btn-danger" data-bs-toggle="collapse" href="#@mystringB" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom:20px; background-color:red">
+        $ @business</a></td>  
+            
+        </tr>
+        <br>
+        <tr>
+        <td colspan="7">
+            @* <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Button with data-bs-target
+            </button> *@
+        <div class="collapse" id="@mystringE">
+            <div class="card card-body">
+                <div class="row">
+                    <div class ="col-md-4">
+                        <img src="@f.FlightPlane.ImageFile" height="250">
+                    </div>
+                    <div class ="col-md-6">
+                        <P><span style="font-weight: bold"> Flight Description: </span>@f.FlightPlane.Description</P> 
+                        <P><span style="font-weight: bold">Max Passengers: </span> @f.FlightPlane.MaxPassenger</P> 
+                            <form method="post">
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label>Economy:</label>
+                                    <input class="form-control" value="$ @f.TicketPrice" readonly/>
+                                    <input class="form-control" asp-for="@Model.FlightClass" type="hidden" value="E"/>
+                                    <input class="form-control" asp-for="@Model.FlightId" type="hidden" value="@f.Id"/>
+                                    <button  class="btn btn-primary mt-2">Select</button>
+                                    @* <a type="button" href="/TicketSummary/@f.Id/E" class="btn btn-outline-primary" style="width:100px">Select</a> *@
+                                </div>                   
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="@mystringB">
+            <div class="card card-body">
+                <div class="row">
+                    <div class ="col-md-4">
+                        <img src="@f.FlightPlane.ImageFile" height="250">
+                    </div>
+                    <div class ="col-md-6">
+                        <P><span style="font-weight: bold"> Flight Description: </span>@f.FlightPlane.Description</P> 
+                        <P><span style="font-weight: bold">Max Passengers: </span> @f.FlightPlane.MaxPassenger</P> 
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Business:</label>
+                                <input class="form-control" value="$ @business" readonly/>
+                                <input class="form-control" asp-for="@Model.FlightClass" type="hidden" value="B"/>
+                                <input class="form-control" asp-for="@Model.FlightId" type="hidden" value="@f.Id"/>
+                                <button  class="btn btn-danger mt-2">Select</button>
+                            </div>                   
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </td>
+        </tr>
+        }
+    </tbody>     
+</div>

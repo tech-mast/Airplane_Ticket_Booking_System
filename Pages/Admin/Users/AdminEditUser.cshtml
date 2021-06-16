@@ -1,0 +1,69 @@
+﻿@page 
+@model EagleFlight.Pages.Admin.Users.AdminEditUserModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control border-d-1" readonly/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDName"></label>
+                <input asp-for="Input.IDName" class="form-control border-d-1" />
+                <span asp-validation-for="Input.IDName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDNum"></label>
+                <input asp-for="Input.IDNum" class="form-control border-d-1" />
+                <span asp-validation-for="Input.IDNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control border-d-1" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img id="img-chosen" src="@Model.imageFilePath" alt="Picture" style="width:200px">
+                <input id="img-file" type="file" asp-for="Input.ImageFile" class="form-control border-d-1" onchange="fileChosen(this)"/>
+            </div>
+            @{
+                if(Model.Input.IsAdmin==true){
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="is_admin_checkbox" onclick="grant(this)" checked>
+                        <label class="form-check-label" for="is_admin_checkbox">Is Admin</label>
+                    </div>
+                }
+                else{
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="is_admin_checkbox" onclick="grant(this)">
+                        <label class="form-check-label" for="is_admin_checkbox">Is Admin</label>
+                    </div>
+                }
+            }
+            <input asp-for="@Model.EditUser" class="hidden">
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/js/image.js"></script>
+    <script>
+        function grant(element){
+            if(element.is(':checked')){
+                @Model.Input.IsAdmin=true;
+            }else{
+                @Model.Input.IsAdmin=false;
+            }
+        }
+    </script>
+}

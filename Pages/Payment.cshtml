@@ -1,0 +1,41 @@
+﻿@page
+@model EagleFlight.Pages.PaymentModel
+@{
+}
+
+<div class="row mt-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+
+        @{ double totalA = Model.xtt.Price+Model.xtt2.Price;}
+        <h3>Total Amount is : $ @totalA.ToString("0.00")</h3><br>
+        <h2>Payment method: </h2><br>
+        <div id="paybt" ></div>
+    </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AXhVH5rwOb9b4UKP98Y3ekIisCcZtCDSfpb_Z5Dxh4v6aUsmzunShTExTsqPNSPolqwlf92bXwMbt-dJ&disable-funding=credit,card"></script>
+
+  <script>
+  @* var checkoutAmount = @Model.TripOne.TicketPrice ; *@
+  var checkoutAmount = 1 ;
+
+paypal.Buttons({
+        createOrder: function(data, actions) {
+
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: checkoutAmount
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            location.href = "/BookTicketSuccess"
+          });
+        }
+      }).render('#paybt');
+
+    </script>  

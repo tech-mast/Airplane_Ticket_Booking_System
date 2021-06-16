@@ -1,0 +1,161 @@
+﻿@page
+@model IndexModel
+@inject SignInManager<EagleFlightUser> signInManager;
+@section Styles {
+    <link rel="stylesheet" href="~/css/customized.css" />
+}
+@{
+    ViewData["Title"] = "Home page";
+}
+<!--SHowcase-->
+<section class="showcase">
+    <div class="container">
+        <div class="showcase-text">
+            <h1>Seasonal Promotion</h1>
+            <p>Our present for your summer plan, up to 75% discount on tickets! <span style="font-size: 10px;">( on
+                    selected tickets)</span>
+            </p>
+            <a href="" class="btn btn-outline">Find Out</a>
+        </div>
+    </div>
+</section>
+
+<!--Search Flight-->
+<div class="search-ticket-form card">
+    <h2>Search For A Flight</h2>
+
+
+    <form method="POST" class="row grid" id="search-ticket-criteria-form">
+        <div class="col-12">
+        <select name="triptype" id="tripType" class="m-3 p-1 border-d-1 col-lg-3 col-md-6 col-sd-12">
+            <option value="0" selected>Round Trip</option>
+            <option value="1" >One way</option>
+        </select>
+        </div>
+        <div class="form-control border-0 grid-col13 col-lg-3 col-md-6 col-sd-12">
+        <label for="">From: </label>
+        <select class="border-d-1" name="origin" asp-for="Origin">
+        @foreach(var o in Model.oList)
+        {
+            <option value="@o" name = "@o">@o</option>
+
+        }          
+        </select>
+        </div>
+         <div class="form-control border-0 grid-col13 col-lg-3 col-md-6 col-sd-12">
+        <label for="">To : </label>
+        <select class="border-d-1" name="destination"
+        asp-for="Destination">
+            @foreach(var o in Model.dList)
+            {
+                <option value="@o" name = "@o">@o</option>
+
+            }
+        </select>      
+            </div>     
+       
+         <div class="form-control border-0 grid-col13 col-lg-3 col-md-6 col-sd-12 show-in-round-trip" >
+            <label for="">Depart: </label>
+            <input class=" border-d-1" asp-for="DepartureDate" type="date" name="departureDate" id="departureDate-round-trip" placeholder="Departure"
+                required>
+        </div>
+
+        <div class="form-control border-0 grid-col13 col-lg-3 col-md-6 col-sd-12 show-in-round-trip" >
+            <label for="">Return: </label>
+            <input class=" border-d-1" asp-for="DepartureDate" type="date" name="returnDate" id="returnDate" placeholder="Return"
+             required>
+             <span id="returnWarmingMsg">Return must not be earilier than departure</span>
+        </div>
+
+        <div class="form-control border-0 grid-col13 col-lg-6 col-md-6 col-sd-12 show-in-one-way" >
+            <label for="">DepartAt: </label>
+            @* <input class=" border-d-1 col-span-2" asp-for="DepartureDate" type="date" name="departureDate" id="departureDate-one-way" placeholder="Departure"
+                required> *@
+            <input class=" border-d-1 col-span-2" asp-for="departureDateOneWay" type="date" placeholder="Departure"
+                required>
+        </div>
+
+        <input class="btn btn-primary col-lg-3 col-md-6" type="submit" value="Search">   
+        <div asp-validation-summary="All" class="text-danger"></div>
+        
+    </form>
+</div>
+
+<!--Upcoming Flight Tables-->
+<section class="martchedFlight">
+    <div class="container">
+        <h2>@(Model.isOnSearch?"Matched Flights":"Upcomping Flights")</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].DepartureTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].ArriveTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].Origin)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].Destination)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].FlightType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UpComingFlighList[0].TicketPrice)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UpComingFlighList)
+                    {
+                        <tr>
+                            <td>
+                                @* @Html.DisplayFor(modelItem => item.DepartureTime) *@
+                             @item.DepartureTime.ToString("yyyy/MM/dd HH:mm")                               
+                            </td>
+                            <td>
+                                @* @Html.DisplayFor(modelItem => item.ArriveTime) *@
+                             @item.ArriveTime.ToString("yyyy/MM/dd HH:mm")     
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Origin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Destination)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FlightType)
+                            </td>
+                            <td>
+                                $ @Html.DisplayFor(modelItem => item.TicketPrice)
+                            </td>
+                            <td>
+                                @if (signInManager.IsSignedIn(User))
+                                {   
+                                <form method="POST">
+                                <input asp-for="Origin" value="@item.Origin" class="hidden">
+                                <input asp-for="Destination" value="@item.Destination" class="hidden">
+                                <input type="datetime" asp-for="DepartureDate" value=@item.DepartureTime class="hidden">
+                                <input asp-for="TripType" value=1 class="hidden">
+                                    
+                                <button type="submit" asp-page-handler="DirectBook" asp-route-sessioncount="99" class="btn btn-primary">Book</button> 
+                                    </form>
+                                    @* <a asp-page="./SearchResult"  class="btn btn-primary">Book a Ticket</a> *@
+                                }else
+                                {
+                                    <a asp-page="./Account/Login" class="btn btn-primary">Login to Book</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</section>
+
+
+<script src="~/js/index.js"></script>

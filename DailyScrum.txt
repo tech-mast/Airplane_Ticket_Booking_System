@@ -1,0 +1,234 @@
+DAILY SCRUM - EVERY DAY AT 8:30AM (as soon as  you arrive)
+==========================================================
+<< current date goes here >>
+1. What I have done / not done since last Scrum?
+2. What I plan to do from this scrum to next? (next 24 hours)
+3. Where do I need assistance? What do I need to figure out?
+==========================================================
+2021/06/14 Edwin
+1. Done / not done since last scrum:
+- email confirm / register
+- admin boarding
+2. To do until next Scrum:
+3. Need assistance / figure things out
+
+2021/06/11 Ying
+1. Done / not done since last scrum:
+-seconde trip page
+-manage flight page
+2. To do until next Scrum:
+-testing all the functions of the whole project
+-prepare ppt
+3. Need assistance / figure things out
+
+2021/06/14 Philip
+1. Done / not done since last scrum:
+- Admin edit user
+2. To do until next Scrum:
+- Bug-fix for one-way trip in Index
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/11 Edwin
+1. Done / not done since last scrum:
+- adapt ticket entity for managing tickets (balance/price, iscancelled)
+- seeding alignement on biz logic
+- upload image preview
+- confirm email sending
+- confirm linkage (not as expectation)
+- dropdown menus for client and admin
+2. To do until next Scrum:
+- admin manage ticket
+- confirm email action page/model
+3. Need assistance / figure things out
+- confirmation url generation
+2021/06/11 Philip
+1. Done / not done since last scrum:
+- Admin index page
+- Bug fixing on main index page
+2. To do until next Scrum:
+- add ajax to switch user/flight/plane/ticket mgnt on admin index
+3. Need assistance / figure things out
+2021/06/11 Ying
+1. Done / not done since last scrum:
+-paypal api
+2. To do until next Scrum:
+-seconde trip page
+-manage flight page
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/10 Edwin
+1. Done / not done since last scrum:
+- bugfix: seeding flight/ticket, boarding
+- user dropdown menu
+- upload files
+- edit profile hwoing picture
+2. To do until next Scrum:
+- admin manage boarding
+3. Need assistance / figure things out
+- sending email
+- confirmation url generation
+- bar code generation
+2021/06/10 Philip
+1. Done / not done since last scrum:
+- boarding page
+- boardingConfirm page
+2. To do until next Scrum:
+- Admin index page
+3. Need assistance / figure things out
+2021/06/10 Ying
+1. Done / not done since last scrum:
+-add collapse function in search page
+-connect with search page and payment summary page
+2. To do until next Scrum:
+-paypal api
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/09 Edwin
+1. Done / not done since last scrum:
+- seed of one client account and one admin account
+- setup supporting google login
+2. To do until next Scrum:
+- admin manage ticket (boarding only) 
+- google login
+- upload files
+- email confirmation
+3. Need assistance / figure things out
+- pdf generation
+- bar code generation
+2021/06/09 Philip
+1. Done / not done since last scrum:
+- Apply style to all pages
+- Basic layout of boarding page
+- bug-fixing on navbar
+2. To do until next Scrum:
+- boarding page
+3. Need assistance / figure things out
+2021/06/09 Ying
+1. Done / not done since last scrum:
+-add collapse function in search page
+-connect with index page make sure the data transfer correctly
+2. To do until next Scrum:
+-add collapse function in search page
+-connect with search page and payment summary page
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/08 Edwin
+1. Done / not done since last scrum:
+- /account/register
+- /account/profile
+- role enabled
+2. To do until next Scrum:
+- admin manage ticket
+- upload files
+- email confirmation
+3. Need assistance / figure things out
+- pdf generation
+- bar code generation
+2021/06/08 PH
+1. Done / not done since last scrum:
+- bug fixing on flights-searching section
+- Applied style to non-index pages
+2. To do until next Scrum:
+- User confirm boarding page
+3. Need assistance / figure things out
+2021/06/08 Ying
+1. Done / not done since last scrum:
+-learn Scaffolding and try to implement to the search page
+2. To do until next Scrum:
+-add collapse function in search page
+-connect with index page make sure the data transfer correctly
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/07 PH
+1. Done / not done since last scrum:
+- bug fixing on flights-searching section
+- matched-flighed section
+2. To do until next Scrum:
+- admin boarding management page
+3. Need assistance / figure things out
+- How to return instance to the same page in POST method
+- Client side input validation
+2021/06/07 Edwin
+1. Done / not done since last scrum:
+- /account/register (page)
+2. To do until next Scrum:
+- role table
+- /account/register (pagemodel)
+3. Need assistance / figure things out
+- email confirmation
+- file upload
+- pdf generation
+- bar code generation
+2021/06/07 Ying
+1. Done / not done since last scrum:
+-add ajax into razor page to realize the search features
+2. To do until next Scrum:
+-learn Scaffolding and try to implement to the search page
+3. Need assistance / figure things out
+-------------------------------------------------------------------
+2021/06/05 Edwin
+1. Done / not done since last scrum:
+- /account/register (page)
+2. To do until next Scrum:
+- role table
+- /account/register (pagemodel)
+3. Need assistance / figure things out
+2021/06/05 PH
+1. Done / not done since last scrum:
+- flights-searching section
+- matched-flighed section
+2. To do until next Scrum:
+- Confirm boadring page
+3. Need assistance / figure things out
+- How to return instance to the same page in POST method
+- Client side input validation
+2021/06/05 Ying
+1. Done / not done since last scrum:
+-learn search by conditions
+2. To do until next Scrum:
+-add ajax into razor page to realize the search features
+3. Need assistance / figure things out
+------------------------------------------------------------------
+2021/06/04 PH
+1. Done / not done since last scrum:
+- Flight CRUD pages
+- Basic Navbar in Layout
+2. To do until next Scrum:
+- flights-searching section
+3. Need assistance / figure things out
+2021/06/04 Edwin
+1. Done / not done since last scrum:
+- database created with extended identityuser
+2. To do until next Scrum:
+- role table
+- /account/register
+3. Need assistance / figure things out
+2021/06/04 Ying
+1. Done / not done since last scrum:
+- UI design for user book page
+2. To do until next Scrum:
+-learn search by conditions
+3. Need assistance / figure things out
+------------------------------------------------------------------
+2021/06/03 Ying
+1.Done/not done since update trello
+-Mockup pages in proposal;
+-discussed the main idea of the project
+2.To do until next Scrum:
+- UI design for user book page
+3.Need assistance / figure things out
+2021/06/03 Edwin
+1. Done / not done since last scrum:
+- project proposal (page 1)
+- bitbucket setup (linked to trello)
+2. To do until next Scrum:
+- database model
+3. Need assistance / figure things out
+2021/06/03 PH
+1. Done / not done since last scrum:
+- project proposal database
+- setup trello
+2. To do until next Scrum:
+- flights-searching section
+3. Need assistance / figure things out
+------------------------------------------------------------------

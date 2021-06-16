@@ -1,0 +1,45 @@
+﻿@page
+@model EagleFlight.Pages.BoardingConfirmModel
+@{
+    ViewData["Title"] = "Boarding";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<!--profile of current user-->
+<section class="card ">
+    <h2>Confirm Boarding</h2>
+     <form method="POST" class="row grid" id="confirm-boarding-form">
+  
+     <div class="form-group">
+        <label asp-for="@Model.Ticket.Id"></label>
+        <input asp-for="@Model.Ticket.Id" class="form-control border-0" readonly />
+    </div>
+
+     <div class="form-group">
+        <label asp-for="@Model.Ticket.PassengerId"></label>
+        <input asp-for="@Model.Ticket.PassengerId" class="form-control border-0" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Ticket.BookedFlightId"></label>
+        <input asp-for="@Model.Ticket.BookedFlightId" class="form-control border-0" readonly />
+    </div> 
+    <div class="form-group">
+        <label asp-for="@Model.Ticket.TicketClass"></label>
+        <input asp-for="@Model.Ticket.TicketClass" class="form-control border-0" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Ticket.Seat"></label>
+        <input asp-for="@Model.Ticket.Seat" class="form-control border-0" readonly />
+    </div>
+
+     <input asp-for="@Model.Ticket.PassengerId" class="form-control border-0 hidden"/>
+     <div class="form-group btn-group-h">
+    <Button type="submit" class="btn btn-primary" >Confirm </Button>
+    <a href="./Boarding" class="btn btn-secondary">Back to Boarding</a>
+     </div>
+    </form>
+</section>
+
+

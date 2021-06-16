@@ -1,0 +1,26 @@
+﻿@page
+@inject SignInManager<EagleFlightUser> signInManager;
+@inject UserManager<EagleFlightUser> userManager;
+@model EagleFlight.Pages.BoardingSuccessModel
+@{
+    ViewData["Title"] = "Board successful";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* <h2>Ticket {@Model.Id}, from {@Model.Origin} to {@Model.Destination} at {@Model.DepartDate} has been boarded. Seat info: {@Model.Seat}. </h2> *@
+<p class="d-inline">Click</p>
+@{
+    if(signInManager.IsSignedIn(User) ){
+        <a class="nav-link d-inline" asp-area="" asp-page="/Account/Myticket">here</a>
+    }else{
+        <a class="nav-link d-inline" asp-area="" asp-page="/Index">here</a>
+    }
+}
+<p class="d-inline">to continue at homepage.</p>  
+<hr/>
+<p>In 5 seconds, it will redirect to your boarding page automatically.</p>  
+
+@section Scripts {
+    <script> setTimeout(function() {window.location.href = "@Model.returnLink";}, 5000);</script>
+}

@@ -1,0 +1,11 @@
+﻿@page
+@model EagleFlight.Pages.UserAccessDeniedModel
+@{
+    ViewData["Title"] = "User Access Denied";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p class="d-inline">To book a ticket you have to login first</p>
+<p class="d-inline">Click</p>
+<a class="nav-link d-inline" asp-area="" asp-page="/Account/Login">here</a>
+<p class="d-inline">to Continue!</p>  

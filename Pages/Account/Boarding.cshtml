@@ -1,0 +1,131 @@
+﻿@page
+@model EagleFlight.Pages.BoardingModel
+@{
+    ViewData["Title"] = "Boarding";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<!--profile of current user-->
+<section class="card ">
+    <h2>User Information</h2>
+    <div class="profile-panel row">
+        <div class="form-group profile-image">
+            <img src="@Model.Input.ImageFile">
+            <span asp-validation-for="Input.ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="profile-description">
+            <div class="form-group">
+                <label asp-for="Email" class=""></label>
+                <input asp-for="Email" class="form-control border-0" disabled />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDName" class=""></label>
+                <input asp-for="Input.IDName" class="form-control border-0" disabled />
+                <span asp-validation-for="Input.IDName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IDNum" class=""></label>
+                <input asp-for="Input.IDNum" class="form-control border-0" disabled />
+                <span asp-validation-for="Input.IDNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber" class=""></label>
+                <input asp-for="Input.PhoneNumber" class="form-control border-0" disabled />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+  
+</section>
+
+<!--Ticket list for current user-->
+<section>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.DepartureTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.ArriveTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.Origin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.Destination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.FlightType)
+                </th>
+                @* <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].BookedFlight.TicketPrice)
+                </th> *@
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Input.Tickets[0].Seat)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.Input.Tickets != null)
+        {
+            <tbody>
+                @foreach (var item in Model.Input.Tickets)
+                {
+                    <tr>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.BookedFlight.DepartureTime) *@
+                            @item.BookedFlight.DepartureTime.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.BookedFlight.ArriveTime) *@
+                            @item.BookedFlight.ArriveTime.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.Origin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.Destination)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookedFlight.FlightType)
+                        </td>
+                        <td>
+                            @* $ @Html.DisplayFor(modelItem => item.Price) *@
+                            $ @item.Price.ToString("0.00")
+                        </td>
+                        <td>
+                            <input asp-for="@item.Seat" class="form-control border-0" disabled />
+                        </td>
+                        <td>
+                            @if (item.Seat == null || item.Seat =="" )
+                            {
+                                <a asp-page="./BoardingConfirm" asp-route-id="@item.Id" class="btn btn-primary">Boarding</a>
+                            }
+                            else
+                            {
+                                <span>Boarded</span>
+                                
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+        {
+
+        }
+    </table>
+</section>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

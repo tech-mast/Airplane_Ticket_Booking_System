@@ -1,0 +1,101 @@
+﻿@inject SignInManager<EagleFlightUser> signInManager;
+@inject UserManager<EagleFlightUser> userManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EagleFlight</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="container-fluid navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-gradient-dark border-0 box-shadow">
+            <div class="container" style="overflow:visible;">
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/img/logo.png" alt="" id="brand-logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @{
+                                if(signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Admin/Index">Home</a>
+                                }else{
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
+                                }
+                            }
+                        </li>
+                    </ul>
+                    
+                    <ul class="navbar-nav ml-auto">
+                        @{
+                            @if (signInManager.IsSignedIn(User))
+                            {
+                                var userName = User.Identity.Name; // userName is email
+                                var user = await userManager.FindByNameAsync(userName);
+                                <div class="dropleft d-flex align-items-center">
+                                    <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="@user.ImageFile" alt="@User.Identity.Name" class="rounded" style = "width:30px">
+                                    </div>
+                                    <div class="dropdown-menu">
+                                        @if(User.IsInRole("Admin")){
+                                        
+                                            <a class="dropdown-item" href="/Account/Profile"><span style="color:gray">Edit Profile</span></a>
+                                            <a class="dropdown-item" href="/Admin/Ticket"><span style="color:gray">Boarding Management</span></a>
+                                            <a class="dropdown-item" href="/Admin/Flights"><span style="color:gray">Flight Management</span></a>
+                                            <a class="dropdown-item" href="/Admin/Planes"><span style="color:gray">Plane Management</span></a>
+                                            <a class="dropdown-item" href="/Admin/Users"><span style="color:gray">User Management</span></a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/Account/Logout"><span style="color:gray">Logout</span></a>
+                                        }else{
+                                            <a class="dropdown-item" href="/Account/Profile"><span style="color:gray">Edit Profile</span></a>
+                                            <a class="dropdown-item" href="/Account/Boarding"><span style="color:gray">Boarding</span></a>
+                                            <a class="dropdown-item" href="/Account/Myticket"><span style="color:gray">My Tickets</span></a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/Account/Logout"><span style="color:gray">Logout</span></a>
+                                        }
+                                    </div>
+                                </div>
+                            }else{
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Account/Register">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Account/Login">Login</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="overflow:visible;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-gradient-dark text-light">
+        <div class="container text-light">
+            &copy; 2021 - EagleFlight - <a asp-area="" asp-page="/Privacy" class="text-light">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

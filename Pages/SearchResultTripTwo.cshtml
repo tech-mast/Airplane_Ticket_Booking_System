@@ -1,0 +1,133 @@
+﻿@page
+@model EagleFlight.Pages.SearchResultTripTwoModel
+@{
+    ViewData["Title"] = "SearchResultTripTwo";
+}
+
+
+@{string date= @Model.DepartureDate.ToString("yyyy-MM-dd");} 
+@{
+    @* <p>@Model.DepartureDate</p>
+    <p>@Model.ArriveTime</p>
+    <p>@Model.OriginLocation</p>
+    <p>@Model.ArriveLocation</p>
+    <p>@Model.TripType</p> *@
+
+   <div class="row justify-content-md-center mt-5">
+        <span class="text-primary font-weight mr-3" style="font-weight:bold; font-size:25px">Change your Departure Date: </span>
+        <input type="date" asp-for="DepartureDate" class = "" style= "width:210px "  value="@date" />
+    </div>
+    <div class="row justify-content-md-start mt-3">
+    <h4 class="text-primary" style="text-decoration: underline; text-decoration-color:blue;font-style: italic;">This is Return Trip </h4>
+    </div>
+@* <a asp-controller="SearchResult" asp-route-DepartureDate="@Model.DepartureDate" asp-route-ArriveTime="@Model.ArriveTime" asp-route-OriginLocation="@Model.OriginLocation" asp-route-ArriveLocation="@Model.ArriveLocation">..</a> *@
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle border-primary" >
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-primary" >From</th>
+                        <th scope="col" class="text-primary">To</th>
+                        <th scope="col" class="text-primary">DepartureTime</th>
+                        <th scope="col" class="text-primary">ArriveTime</th>
+                        <th scope="col" class="text-primary">Type</th>
+                        <th scope="col" class="text-primary">Economy Price</th>
+                        <th scope="col" class="text-danger">Business Price</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @foreach (var f in Model.FlightSearchList)
+                    {
+                    <tr>
+                    <td>@f.Origin</td>
+                    <td>@f.Destination</td>
+                    <td>@f.DepartureTime.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@f.ArriveTime.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@f.FlightType</td>
+                    @{ string mystringE = "a"+@f.Id.ToString();}
+                    <td>  <a class="btn btn-primary" data-bs-toggle="collapse" href="#@mystringE" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom:20px">
+                        $ @f.TicketPrice</a></td> 
+
+                    @{ string mystringB = "b"+@f.Id.ToString();}
+                    @{double business = @f.TicketPrice * 1.5;}
+                    <td>  <a class="btn btn-danger" data-bs-toggle="collapse" href="#@mystringB" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom:20px; background-color:red">
+                    $ @business</a></td>  
+                        
+                    </tr>
+                    <br>
+                    <tr>
+                    <td colspan="7">
+                        @* <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Button with data-bs-target
+                        </button> *@
+                    <div class="collapse" id="@mystringE">
+                        <div class="card card-body">
+                            <div class="row">
+                                <div class ="col-md-4">
+                                    <img src="@f.FlightPlane.ImageFile" height="250">
+                                </div>
+                                <div class ="col-md-6">
+                                    <P><span style="font-weight: bold"> Flight Description: </span>@f.FlightPlane.Description</P> 
+                                    <P><span style="font-weight: bold">Max Passengers: </span> @f.FlightPlane.MaxPassenger</P> 
+                                        <form method="post">
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                            <div class="form-group">
+                                                <label>Economy:</label>
+                                                <input class="form-control" value="$ @f.TicketPrice" readonly/>
+                                                <input class="form-control" asp-for="@Model.FlightClassTwo" type="hidden" value="E"/>
+                                                <input class="form-control" asp-for="@Model.FlightIdTwo" type="hidden" value="@f.Id"/>
+                                                <button  class="btn btn-danger mt-2">Select</button>
+                                                @* <a type="button" href="/TicketSummary/@f.Id/E" class="btn btn-outline-primary" style="width:100px">Select</a> *@
+                                            </div>                   
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="@mystringB">
+                        <div class="card card-body">
+                            <div class="row">
+                                <div class ="col-md-4">
+                                    <img src="@f.FlightPlane.ImageFile" height="250">
+                                </div>
+                                <div class ="col-md-6">
+                                    <P><span style="font-weight: bold"> Flight Description: </span>@f.FlightPlane.Description</P> 
+                                    <P><span style="font-weight: bold">Max Passengers: </span> @f.FlightPlane.MaxPassenger</P> 
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <label>Business:</label>
+                                            <input class="form-control" value="$ @business" readonly/>
+                                            <input class="form-control" asp-for="@Model.FlightClassTwo" type="hidden" value="B"/>
+                                            <input class="form-control" asp-for="@Model.FlightIdTwo" type="hidden" value="@f.Id"/>
+                                            <button  class="btn btn-danger mt-2">Select</button>
+                                        </div>                   
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </td>
+                    </tr>
+                    }
+                </tbody>        
+            </table>
+            
+        </div>
+}
+
+@section scripts{
+    <script>
+       $(document).ready(function() {
+            $('#DepartureDate').on('change', function() {
+            var DepartureDate =$(this).val() ;
+
+            console.log(DepartureDate);
+            console.log("@Model.OriginLocation");
+            console.log("@Model.DepartureDate");
+            $("#tableBody").load("/AjaxsearchResultTwo/" + DepartureDate+"/"+"@Model.OriginLocation"+"/"+"@Model.ArriveLocation");
+            });
+       }); 
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+}   

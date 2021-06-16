@@ -1,0 +1,99 @@
+﻿@page
+@using Microsoft.Extensions.Logging;
+@inject ILogger<TicketModel> logger;
+@inject UserManager<EagleFlightUser> userManager;
+@model EagleFlight.Pages.TicketModel
+@{
+    ViewData["Title"] = "Admin Ticket";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr/>
+<section class="mx-3 my-2">
+    <div class="form-group">
+        <label for="flight_num">Flight</label>
+        <select class="form-control" id="flight_num" onchange="loadFlightTickets(this)">
+            <option value="0" selected>All Available</option>
+        @foreach( var flight in Model.Flights){
+            <option value="@flight.Id">@flight.Origin-@flight.Destination-@flight.DepartureTime.ToString("yyyyMMddHHmm")</option>
+        }
+        </select>
+    </div>
+</section>
+<!--Ticket list for current user-->
+<section>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Flight ID
+                </th>
+                <th>
+                    Passenger Name
+                </th>
+                <th>
+                    Passenger ID
+                </th>
+                <th>
+                    Seat
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="ticket_list">
+            @foreach(var ticket in Model.Tickets)
+            {
+                var user = await userManager.FindByIdAsync(ticket.PassengerId); 
+                var flight = Model.Flights.Where(f=>f.Id==ticket.BookedFlightId).FirstOrDefault();
+                <tr>
+                    <td>
+                        @flight.Origin-@flight.Destination-@flight.DepartureTime.ToString("yyyyMMddHHmm")
+                    </td>
+                    <td>
+                        @user.IDName
+                    </td>
+                    <td>
+                        @user.IDNum
+                    </td>
+                    <td>
+                        <input id="boarding_seat_@ticket.Id" asp-for="@ticket.Seat" class="form-control border-0" readonly />
+                    </td>
+                    <td>
+                        @if (ticket.Seat == null || ticket.Seat =="" )
+                        {
+                            <button id="boarding_btn_@ticket.Id" onclick="boarding(@ticket.Id)" class="btn btn-primary">Boarding</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" disabled>Boarded</button>
+                            
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@section scripts{
+    <script>
+        function loadFlightTickets(element)
+        {
+            var flightId = element.value;
+            console.log("selected option: "+flightId);
+            $("#ticket_list").load("/Admin/TicketList/" + flightId); // jQuery load() method is an AJAX method
+        }
+        function boarding(tid)
+        {
+            $.get('/Admin/BoardingJSON/'+tid).done(function (seat){
+                console.log("boarding seat: "+seat);
+                if(seat!="")
+                {
+                    $('#boarding_seat_'+tid).val(seat);
+                    $('#boarding_btn_'+tid).html("Boarded");
+                    $('#boarding_btn_'+tid).prop( "disabled", true );
+                }
+            })
+        }
+    </script>
+}

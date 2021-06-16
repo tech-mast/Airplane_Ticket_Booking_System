@@ -1,0 +1,95 @@
+﻿@page 
+@model EagleFlight.Pages.Admin.Users.IndexModel
+@inject SignInManager<EagleFlightUser> signInManager;
+@inject UserManager<EagleFlightUser> userManager;
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="contianer">
+    <section class="admin-mgnt-content">
+        @* @Model.userList.Count; *@
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.userList[0].Email)
+                    </th>
+                    <th>
+                       Avatar
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.userList[0].IDName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.userList[0].IDNum)
+                    <th>
+                            @Html.DisplayNameFor(model => model.userList[0].PhoneNumber)
+                    </th>
+                    <th>
+                            Is Admin
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @if (Model.userList != null)
+            {
+                <tbody>
+                    @foreach (var item in Model.userList)
+                    {
+                        if (item.Email != User.Identity.Name)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                     <img id="img-chosen" src="@item.ImageFile" alt="Picture" style="width:50px">
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDNum)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                @{
+                                    var isRoleAdmin = await userManager.IsInRoleAsync(item, "Admin");
+                                    if(isRoleAdmin){
+                                        <td>Yes</td>
+                                        }
+                                    else{
+                                        <td>No</td>
+                                        }
+                                }
+                                <td>
+
+                                    <form method="POST">
+                                        <input type="text" asp-for="TargetUser" value="@item.Email" class="hidden">
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            }
+            else
+            {
+
+            }
+        </table>
+        
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/js/image.js"></script>
+}

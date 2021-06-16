@@ -1,0 +1,2 @@
+Admin: master@admin.com / Masteradmin123!
+Client: edwin@lee.ca / Edwin123!
